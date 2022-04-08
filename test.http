@@ -1,0 +1,35 @@
+@id = 16
+
+GET http://localhost:8080/books
+###
+
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+    "id": 1, 
+    "title": "Harry Potter", 
+    "author": "J. K. Rowling"
+}
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "username": "username", 
+    "password": "1234"
+}
+
+###
+
+GET http://localhost:8080/books
+Authorization: Bearer ACCESS_TOKEN
+
+
+###
+
+DELETE  http://localhost:8080/books/{{id}}
+Authorization: Bearer ACCESS_TOKEN
+
+
