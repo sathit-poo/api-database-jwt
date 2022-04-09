@@ -9,6 +9,7 @@ import (
 	"github.com/nick/api-database-jwt/controller"
 	"github.com/nick/api-database-jwt/model"
 	"github.com/nick/api-database-jwt/service"
+	"github.com/unrolled/secure"
 	"gorm.io/gorm"
 )
 
@@ -20,6 +21,8 @@ func main() {
 	migrate()
 
 	r := gin.New()
+	//r.Use(LoadTls())
+
 	login := controller.LoginController{}
 	r.POST("/login", login.LoginHandler)
 
@@ -30,8 +33,26 @@ func main() {
 	r.POST("/books", book.CreateBookHandler)
 	r.DELETE("/books/:id", book.DeleteBookHandler)
 
-	r.Run()
+	//r.Run()
+	r.Run(":3000")
+	//r.RunTLS(":8080", "cer/example.com.pem", "cer/example.com-key.pem")
 
+}
+func LoadTls() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		middleware := secure.New(secure.Options{
+			SSLRedirect: true,
+			SSLHost:     "localhost:8000",
+		})
+		err := middleware.Process(c.Writer, c.Request)
+		if err != nil {
+			//If an error occurs, do not continue.
+			fmt.Println(err)
+			return
+		}
+		//Continue processing
+		c.Next()
+	}
 }
 
 func migrate() {
