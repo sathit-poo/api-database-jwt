@@ -74,7 +74,7 @@ func authorizationMiddleware(c *gin.Context) {
 }
 func validateToken(token string) error {
 	if token != "ACCESS_TOKEN" {
-		return fmt.Errorf("token provided was invalid")
+		return fmt.Errorf("token provided was invalid ")
 	}
 
 	return nil
