@@ -2,14 +2,18 @@
 @token = "ACCESS_TOKEN"
 
 GET http://localhost:8080/books
+
 ###
+
 POST http://localhost:8080/books
-Content-Type: application/json
+content-type: application/json
+
 {
-    "id": 1, 
-    "title": "Harry Potter", 
+   // "id": 3,
+    "title": "Harry Potter",
     "author": "Rowling"
 }
+
 ###
 POST http://localhost:8080/login
 Content-Type: application/json
@@ -19,8 +23,14 @@ Content-Type: application/json
     "password": "1234"
 }
 ###
-GET http://localhost:8080/api/books
+GET http://localhost:8080/books
 Authorization: Bearer ACCESS_TOKEN
+
+
+###
+GET https://nick-golang-api.herokuapp.com/api/books
+Authorization: Bearer ACCESS_TOKEN
+
 
 ### test enginx integate
 GET http://localhost/api/books
@@ -31,4 +41,5 @@ Authorization: Bearer ACCESS_TOKEN
 DELETE  http://localhost:8080/books/{{id}}
 Authorization: Bearer ACCESS_TOKEN
 
+### test
 
