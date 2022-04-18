@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strings"
 
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/nick/api-database-jwt/controller"
 	"github.com/nick/api-database-jwt/model"
@@ -33,8 +35,9 @@ func main() {
 	r.POST("/books", book.CreateBookHandler)
 	r.DELETE("/books/:id", book.DeleteBookHandler)
 
+	port := os.Getenv("PORT")
 	//r.Run()
-	r.Run(":8080")
+	r.Run(":" + port)
 	//r.RunTLS(":8080", "cer/example.com.pem", "cer/example.com-key.pem")
 
 }
